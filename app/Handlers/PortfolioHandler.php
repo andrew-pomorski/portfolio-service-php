@@ -4,6 +4,7 @@ namespace App\Handlers;
 
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Log;
 
 
 
@@ -26,7 +27,7 @@ class PortfolioHandler {
 			]
 		]);
 		
-		return $response;
+		return $response->getBody();
 	}
 
         public function RequestHistoricalData($client_id) {
@@ -37,8 +38,10 @@ class PortfolioHandler {
                     'Referer'       => 'test-server'
                 ]
             ]);
-
-            	return $response;
+		Log::info('Historical Data Handler');
+		Log::info($response->getStatusCode());
+		Log::info($response->getBody());
+            	return $response->getBody();
         }
 
 	public function RequestAccountData($client_id) {
@@ -50,7 +53,7 @@ class PortfolioHandler {
 			]
 		]);
 
-		return $response;
+		return $response->getBody();
 	}
 
 	
