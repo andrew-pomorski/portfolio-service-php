@@ -1,0 +1,31 @@
+<h1> List of investments </h1>
+
+<div ng-controller="investmentsCtrl">
+<table class="table table-striped">
+     <thead>
+          <tr>
+		<th>Ticker</th>
+		<th>Name</th>
+		<th>No. Shares</th>
+		<th>Price</th>
+		<th>Value</th>
+		<th> % </th>
+         </tr>
+          <thead>
+          <tbody>
+	{{ data }}	
+	<div ng-repeat="entry in data">
+	<div ng-repeat="record in entrry">
+                  <tr>
+                          <td>{{ record.Ticker }}</td>
+                          <td>{{ record.Name }}</td>
+                          <td>{{ record.Shares }}</td>
+                          <td>{{ record.MarkPrice }}</td>
+                          <td class="values">{{ record.Value }}</td>
+                          <td class="percentage" >{{ record.Percentage }}</td>
+                  </tr>
+       </div>
+       </div>   
+       <tbody>
+</table>
+</div>
