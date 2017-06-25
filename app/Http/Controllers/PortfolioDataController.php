@@ -47,9 +47,12 @@ class PortfolioDataController extends BaseController
 	
     }
 
-
-
-
-
-
+    public function getMarketShare(Request $req) {
+		if ($req->has('clientId')){
+			$portfolio = $this->PortfolioHandler->getMarketShare($req->clientId);
+			return $portfolio;
+		} else {
+			return "ClientID not found. Quitting.";
+		}
+    }
 }

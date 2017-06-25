@@ -56,5 +56,18 @@ class PortfolioHandler {
 		return $response->getBody();
 	}
 
+
+	public function getMarketShare($client_id) {
+		$response = $this->client->request('GET', $this->config['market_share_url'] . $client_id, [
+			'headers' => [
+			    'Content-Type'  => 'application/json',
+			    'Authorization' => 'Bearer '  . $this->config['bearer_token'],
+			    'Referer'       => 'test-server'
+			]
+		]);
+
+		return $response->getBody();	
+	}
+
 	
 }

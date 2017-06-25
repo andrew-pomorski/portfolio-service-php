@@ -20,4 +20,5 @@ Route::group(['middleware' => 'web'], function () {
 	Route::get('/getportfolio', 'PortfolioDataController@getPortfolioData');
 	Route::get('/gethistorical', 'PortfolioDataController@getHistoricalData');
 	Route::get('/getaccinfo', 'PortfolioDataController@getAccountInfo');
+	Route::get('/getmarketshare', 'PortfolioDataController@getMarketShare');
 });
