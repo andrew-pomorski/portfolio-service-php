@@ -7,25 +7,21 @@
 		<th>Ticker</th>
 		<th>Name</th>
 		<th>No. Shares</th>
-		<th>Price</th>
+		<th>Price &nbsp; {{ currency }}</th>
 		<th>Value</th>
 		<th> % </th>
          </tr>
           <thead>
           <tbody>
-	{{ data }}	
-	<div ng-repeat="entry in data">
-	<div ng-repeat="record in entrry">
-                  <tr>
-                          <td>{{ record.Ticker }}</td>
-                          <td>{{ record.Name }}</td>
-                          <td>{{ record.Shares }}</td>
-                          <td>{{ record.MarkPrice }}</td>
-                          <td class="values">{{ record.Value }}</td>
-                          <td class="percentage" >{{ record.Percentage }}</td>
+	
+                  <tr ng-repeat="i in data">
+                          <td>{{ i.Ticker }}</td>
+                          <td>{{ i.Name }}</td>
+                          <td>{{ i.Shares }}</td>
+                          <td>{{ i.MarkPrice }}</td>
+                          <td class="values">{{ i.Value | number:0 }}</td>
+                          <td class="percentage" >{{ i.Percentage | number:0}}</td>
                   </tr>
-       </div>
-       </div>   
        <tbody>
 </table>
 </div>

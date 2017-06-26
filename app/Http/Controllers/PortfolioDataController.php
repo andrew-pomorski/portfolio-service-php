@@ -28,7 +28,8 @@ class PortfolioDataController extends BaseController
 
     public function getHistoricalData(Request $req){
 		if ($req->has('clientId')){
-			$portfolio = $this->PortfolioHandler->RequestHistoricalData($req->clientId);
+			$req->has('days') ? $days = $req->days : $days = 365;
+			$portfolio = $this->PortfolioHandler->RequestHistoricalData($req->clientId, $days);
 			return $portfolio;
 		} else {
 			return "ClientID not found. Quitting.";
