@@ -3,7 +3,7 @@
   <head>
     <title>Portfolio Service</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script> 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"> </script>
     <script src="node_modules/angular-route/angular-route.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600" rel="stylesheet">
@@ -55,9 +55,6 @@
 
           <div class="row placeholders">
             <div class="col-xs-6 col-sm-3 ">
-              <span><a class="btn btn-default" href="#!historical">Historical Performance</a></span>
-            </div>
-            <div class="col-xs-6 col-sm-3 ">
               <span><a class="btn btn-default" href="#!overall">Overall Portfolio</a></span>
             </div>
             <div class="col-xs-6 col-sm-3 ">
@@ -65,6 +62,9 @@
             </div>
             <div class="col-xs-6 col-sm-3 ">
               <span ><a class="btn btn-default" href="#!investments">List of Investments</a></span>
+            </div>
+            <div class="col-xs-6 col-sm-3 ">
+              <span><a class="btn btn-default" href="#!historical">Historical Performance</a></span>
             </div>
           </div>
 

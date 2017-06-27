@@ -29,15 +29,17 @@ portfolioApp.config(function($routeProvider){
 });
 
 
+
 portfolioApp.run(['$http', '$rootScope', function($http, $rootScope){
 	$rootScope.AccountInfo = {};
 	$http({
 		method: 'GET',
 		url: base_api_url + '/getaccinfo?clientId=d89248d0-05d4-11e6-8cf6-05443d8c1614',
 	}).then(function successCallback(response){
-		console.log(response.data);
 		$rootScope.AccountInfo = response.data;	
 		localStorage.setItem('userData', JSON.stringify(response.data));
+	}, function failureCallback(response){
+		// TODO: handle that.
 	});
 }]);
 
@@ -68,33 +70,50 @@ portfolioApp.controller('overallCtrl', ['$scope', '$rootScope', '$http', functio
 portfolioApp.controller('allocationCtrl', ['$scope', '$http', function($scope, $http){
 	$scope.page.CV = "Portfolio Allocation";	
 	$http({
+		cache: true,
 		method: 'GET',
 		url: base_api_url + '/getmarketshare?clientId=d89248d0-05d4-11e6-8cf6-05443d8c1614',
-	}).then(function(response){
-	})
-	// Google Chart
-	google.charts.load('current', {'packages': ['corechart']});
-	google.charts.setOnLoadCallback(drawChart);	
-	function drawChart() {
-		// Create the data table.
-		var data = new google.visualization.DataTable();
-		data.addColumn('string', 'Topping');
-		data.addColumn('number', 'Slices');
-		console.log(allocationData);
-		data.addRows([
-		  ['Developed Markets', allocationData.Developed_Markets],
-		  ['Domestic Markets', allocationData.Domestic_Markets ],
-		  ['Fixed Income', allocationData.Fixed_Income]
-		]);
-
-		// Set chart options
-		var options = { 'width':600,
-			       'height':400};
-
-		// Instantiate and draw our chart, passing in some options.
-		var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-		chart.draw(data, options);
-	}
+	}).then(function successCallback(response){
+		console.log(response.data.Developed_Markets);	
+		// TODO: Initialize a chart here.
+		var ctx = document.getElementById('allocationChart').getContext('2d');
+		ctx.canvas.height = 500;
+		ctx.canvas.width = 500;
+		var chart = new Chart(ctx, {
+			type: 'doughnut',
+			options: {
+				legend: {
+					display: true,
+					position: 'right'
+				},
+				responsive: false,
+				MaintainAspectRatio: false
+			},
+			data: {
+				labels: ['Developed Markets', 'Domestic Markets', 'Fixed Income'],
+				datasets: [{
+					data: [
+						Math.round(response.data.Developed_Markets * 100) / 100 , 
+						Math.round(response.data.Domestic_Markets * 100) / 100, 
+						Math.round(response.data.Fixed_Income * 100) /100
+					],
+					backgroundColor: [
+						'#FF6384',
+						'#36A2EB',
+						'#FFCE56'
+					], 
+					hoverBackgroundColor: [
+						'#FF6384',
+						'#36A2EB',
+						'#FFCE56'
+					] 
+				}],
+				
+			}
+		});	
+	}, function failureCallback(response){
+		// FIXME: handle that.
+	});
 }]);
 
 portfolioApp.controller('investmentsCtrl', ['$scope', '$http', '$rootScope', function($scope, $http, $rootScope){
