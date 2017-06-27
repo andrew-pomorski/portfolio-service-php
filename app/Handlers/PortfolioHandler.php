@@ -21,14 +21,19 @@ class PortfolioHandler {
 		);
 	}
 	
+
+
 	public function RequestData($client_id){
 		$response = $this->client->request('GET', $this->config['current_url'] . $client_id, [
 			'headers' => $this->headers 
-		]);
+		]) ;
 		
 		return $response->getBody();
 	}
 
+	
+	// TODO: it should be possible to change it to put the parameters into an array, without creating such long ]
+	// query string.
         public function RequestHistoricalData($client_id, $days) {
             $response = $this->client->request('GET', $this->config['historical_url'] . $client_id . "&days=" . $days, [
                 'headers' => $this->headers 
