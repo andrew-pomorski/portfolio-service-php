@@ -44,23 +44,101 @@ portfolioApp.run(['$http', '$rootScope', function($http, $rootScope){
 }]);
 
 
-portfolioApp.controller('mainCtrl',  ['$scope', '$rootScope', function($scope, $rootScope){
+portfolioApp.controller('mainCtrl',  ['$scope', '$rootScope', '$http', function($scope, $rootScope, $http){
 	$scope.page = {};
 	$scope.page.CV = "Overall Performance";
 }]);
 
-portfolioApp.controller('historicalController', ['$scope', '$rootScope', function($scope, $rootScope){
+portfolioApp.controller('historicalController', ['$scope', '$rootScope', '$http', function($scope, $rootScope, $http){
 	$scope.page.CV = "Historical Performance";
+	$http({
+		cache: true,
+		method: 'GET',
+		url: base_api_url + '/gethistorical?clientId=d89248d0-05d4-11e6-8cf6-05443d8c1614'
+	}).then(function successCallback(res){
+		var chartDataValue = [];
+		var chartDataLabels = [];
+		var arrLen = res.data.length;
+		for (var i = 0; i < arrLen; i++){
+			chartDataValue.push(res.data[i].Total);
+			chartDataLabels.push((a = new Date(res.data[i].Date), `${a.getMonth()}/${a.getFullYear()}`));
+		}
+		var ctx_total = document.getElementById('historical_chart_total').getContext('2d');
+		ctx_total.canvas.height = 300;
+		ctx_total.canvas.width = 900;
+		var chart = new Chart(ctx_total, {
+			type: 'line',
+			options: {
+				elements: {
+					point: {
+						radius: 0
+					},
+					line: {
+						fill: false
+					}
+				},
+				legend: {
+					display: false,
+					position: 'bottom'
+				},
+				responsive: false,
+				maintainAspectRatio: false,
+			},
+			data: {
+				labels: chartDataLabels,
+				datasets: [{
+					data: chartDataValue
+				}] 
+			}
+		});
+
+	});
 }]);
 
 portfolioApp.controller('overallCtrl', ['$scope', '$rootScope', '$http', function($scope, $rootScope, $http){
 	$scope.page.CV = "Overall Performance";
 	$rootScope.Currency = {};
 	$http({
+		cache: true,
 		method: 'GET',
-		url: base_api_url + '/getaccinfo?clientId=d89248d0-05d4-11e6-8cf6-05443d8c1614',
+		url: base_api_url + '/gethistorical?clientId=d89248d0-05d4-11e6-8cf6-05443d8c1614',
 	}).then(function successCallback(response){
-		$rootScope.Currency = response.data.Currency;
+		// TODO: loop throug response obj and append to arr.
+		var chartDataValue = [];
+		var chartDataDates = [];
+		var arrLen = response.data.length;
+		for (var i = 0; i < arrLen; i++){
+			chartDataValue.push(response.data[i].Value);
+			// (a=new Date("2016-08-16T00:00:00Z"),`${a.getMonth()}/${a.getFullYear()}`) 
+			chartDataDates.push((a = new Date(response.data[i].Date), `${a.getMonth()}/${a.getFullYear()}`));
+		}
+		var ctx = document.getElementById('overall_chart').getContext('2d');
+		ctx.canvas.height = 300;
+		ctx.canvas.width = 900;
+		var chart = new Chart(ctx, {
+			type: 'line',
+			options: {
+				elements: {
+					point: {
+						radius: 0
+					}
+				},
+				legend: {
+					display: false,
+					position: 'bottom'
+				},
+				responsive: false,
+				maintainAspectRatio: false,
+			},
+			data: {
+				labels: chartDataDates,
+				datasets: [{
+					data: chartDataValue,
+				}]
+
+			}
+
+		});
 	}, function errorCallback(response){
 		console.log("Error in callback");
 	});
@@ -76,7 +154,7 @@ portfolioApp.controller('allocationCtrl', ['$scope', '$http', function($scope, $
 	}).then(function successCallback(response){
 		console.log(response.data.Developed_Markets);	
 		// TODO: Initialize a chart here.
-		var ctx = document.getElementById('allocationChart').getContext('2d');
+		var ctx = document.getElementById('allocation_chart').getContext('2d');
 		ctx.canvas.height = 500;
 		ctx.canvas.width = 500;
 		var chart = new Chart(ctx, {

@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'bearer_token' => 'UVtgGNyOiDkMadl>dnIov<Wqnj><jEcfHu7CQJ4dhPCUIKoQjuuyCLfhA53afeb6redqre6q30b7>nABYZIKUW==',
+	'bearer_token' => 'G>wlLRe4WsgKBhp<Fy1Jvie5sKCmchu0PsiQRmuaDqFnpIBm0jgKAUJ3IHY6Z6TuXOik>ycS4XSDkVNA4hxbHG==',
 	'base_url' =>  'https://dev.services.briteinvest.com:4661/portfolio/',
 
 );
