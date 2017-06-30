@@ -58,10 +58,12 @@ portfolioApp.controller('historicalController', ['$scope', '$rootScope', '$http'
 	}).then(function successCallback(res){
 		var chartDataValue = [];
 		var chartDataLabels = [];
+		var chartDataObjDate = [];
 		var arrLen = res.data.length;
 		for (var i = 0; i < arrLen; i++){
 			chartDataValue.push(res.data[i].Total);
 			chartDataLabels.push((a = new Date(res.data[i].Date), `${a.getMonth()}/${a.getFullYear()}`));
+			chartDataObjDate.push(new Date(res.data[i].Date))
 		}
 		var ctx_total = document.getElementById('historical_chart_total').getContext('2d');
 		ctx_total.canvas.height = 300;
@@ -88,7 +90,35 @@ portfolioApp.controller('historicalController', ['$scope', '$rootScope', '$http'
 				labels: chartDataLabels,
 				datasets: [{
 					data: chartDataValue
-				}] 
+				}]
+			}
+		});
+		var ctx_diff = document.getElementById('historical_chart_diff').getContext('2d');
+		ctx_diff.canvas.height = 300;
+		ctx_diff.canvas.width = 900;
+		var chart_diff = new Chart(ctx_diff, {
+			type: 'line',
+			options: {
+				elements: {
+					point: {
+						radius: 0
+					},
+					line: {
+						fill: false
+					}
+				},
+				legend: {
+					display: false,
+					position: 'bottom'
+				},
+				responsive: false,
+				maintainAspectRatio: false,
+			},
+			data: {
+				labels: chartDataLabels,
+				datasets: [{
+					data: chartDataObjDate
+				}]
 			}
 		});
 
