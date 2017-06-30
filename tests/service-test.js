@@ -73,6 +73,10 @@ describe('Test the BODY of the response', function(){
 				res.text = JSON.parse(res.text);
 				res.text.should.be.an('array').that.is.not.empty;
 				res.text[0].should.have.property('Country');
+				res.text[0].should.have.property('Date');
+				res.text[0].should.have.property('Value');
+				res.text[0].should.have.property('Cash');
+				res.text[0].should.have.property('Total');
 				done();
 			})
 	
@@ -90,6 +94,38 @@ describe('Test the BODY of the response', function(){
 			})
 	
 	});
+
+	it('Market share should be valid JSON with given properties', function(done){
+		chai.request(staging_url)
+			.get('/getmarketshare?clientId=' + client_id)
+			.end(function(err, res){
+				var res_obj = JSON.parse(res.text);
+				res_obj.should.have.property('Domestic_Markets');
+				res_obj.should.have.property('Developed_Markets');
+				res_obj.should.have.property('Fixed_Income');
+				done();
+			})
+	});
+	
+
+	it('Current Portfolio should be a valid JSON with given properties', function(done){
+		chai.request(staging_url)
+			.get('/getportfolio?clientId=' + client_id)
+			.end(function(err, res){
+				res.text = JSON.parse(res.text);
+				res.text.should.be.an('array').that.is.not.empty;
+				res.text[0].should.have.property('Country');
+				res.text[0].should.have.property('Ticker');
+				res.text[0].should.have.property('Shares');
+				res.text[0].should.have.property('MarkPrice');
+				res.text[0].should.have.property('Value');
+				res.text[0].should.have.property('Percentage');
+				res.text[0].should.have.property('Name');
+				res.text[0].should.have.property('SecCode');
+				done();
+			})
+	});
+
 });
 
 
