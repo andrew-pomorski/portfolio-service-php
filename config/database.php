@@ -41,11 +41,11 @@ return [
 
 	'mongodb' => [
 		'driver' => 'mongodb',
-		'host' => env('DB_HOST', 'localhost'),
-		'port' => env('DB_PORT', 27017),
-		'database' => env('DB_DATABASE', 'forge'),
-		'username' => env('DB_USERNAME'),
-		'password' => env('DB_PASSWORD'),
+		'host' => env('DB_HOST_MON', 'localhost'),
+		'port' => env('DB_PORT_MON', 27017),
+		'database' => env('DB_DATABASE_MON', 'forge'),
+		'username' => env('DB_USERNAME_MON'),
+		'password' => env('DB_PASSWORD_MON'),
 		'options' => [
 			'database' => 'admin'
 		]

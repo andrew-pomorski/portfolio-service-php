@@ -4,6 +4,8 @@
     <title>Portfolio Service</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script> 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+    <script type="text/javascript" src="js/changeBg.js"></script> 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"> </script>
     <script src="node_modules/angular-route/angular-route.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600" rel="stylesheet">
@@ -30,41 +32,30 @@
 
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Reports</a></li>
-            <li><a href="#">Analytics</a></li>
-            <li><a href="#">Export</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="">Nav item</a></li>
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-            <li><a href="">More navigation</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-          </ul>
+        <div class="col-sm-6 col-md-4 sidebar" id="side_navbar">
+	<!-- Side navbar -->
         </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Currently viewing: <span class="currently-viewing">{{ page.CV }}</span></h1>
-
-          <div class="row placeholders">
+        <div class="col-sm-6 col-sm-offset-6 col-md-8 col-md-offset-4 main">
+	 <div class="row"> 
+		 <div class="info-text">
+			  <h1 class="page-header">Superannuation fund: <span class="currently-viewing">{{ page.SuperFund }}</span></h1>
+			  <h2 class="rec-con">View recent contributions</h2>
+			  <h1 class="page-header">Currently viewing: <span class="currently-viewing">{{ page.CV }}</span></h1>
+		 </div>
+	 </div>
+	 <span style="border-bottom: 1px solid #eee;"></span>
+         <div class="row placeholders">
             <div class="col-xs-6 col-sm-3 ">
-              <span><a class="btn btn-default" href="#!overall">Overall Portfolio</a></span>
+              <span><a id="overall_btn" class="btn btn-default" href="#!overall">Overall Portfolio</a></span>
             </div>
             <div class="col-xs-6 col-sm-3 ">
-              <span><a class="btn btn-default" href="#!allocation">Portfolio Allocation</a></span>
+              <span><a id="allocation_btn" class="btn btn-default" href="#!allocation">Portfolio Allocation</a></span>
             </div>
             <div class="col-xs-6 col-sm-3 ">
-              <span ><a class="btn btn-default" href="#!investments">List of Investments</a></span>
+              <span ><a id="investments_btn" class="btn btn-default" href="#!investments">List of Investments</a></span>
             </div>
             <div class="col-xs-6 col-sm-3 ">
-              <span><a class="btn btn-default" href="#!historical">Historical Performance</a></span>
+              <span><a id="historical_btn" class="btn btn-default" href="#!historical">Historical Performance</a></span>
             </div>
           </div>
 

@@ -50,7 +50,7 @@ portfolioApp.controller('mainCtrl',  ['$scope', '$rootScope', '$http', function(
 }]);
 
 portfolioApp.controller('historicalController', ['$scope', '$rootScope', '$http', function($scope, $rootScope, $http){
-	$scope.page.CV = "Historical Performance";
+        $scope.page.CV = "Historical Performance";
 	$http({
 		cache: true,
 		method: 'GET',

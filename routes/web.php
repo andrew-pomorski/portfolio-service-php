@@ -15,10 +15,17 @@ Route::get('/', function () {
 	return View::make('index');
 });
 
-
 Route::group(['middleware' => 'web'], function () {
 	Route::get('/getportfolio', 'PortfolioDataController@getPortfolioData');
 	Route::get('/gethistorical', 'PortfolioDataController@getHistoricalData');
 	Route::get('/getaccinfo', 'PortfolioDataController@getAccountInfo');
 	Route::get('/getmarketshare', 'PortfolioDataController@getMarketShare');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

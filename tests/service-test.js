@@ -129,3 +129,17 @@ describe('Test the BODY of the response', function(){
 });
 
 
+describe('This suite asserts TIME of the request', function(){
+	it('Check if the /getportfolio path isn\'t taking more than 1000ms');
+	it('Check if the /gethistorical path isn\'t taking more than 1000ms');
+	it('Check if the /getaccinfo path isn\'t taking more than 1000ms');
+	it('Check if the /getmarketshare path isn\'t taking more than 1000ms');
+})
+
+
+describe('This suite checks if the AUTH is successful', function(){
+	it('Checks for 302 redirect status code from the login page');
+	it('Checks if the dashboard page is sending 200 status code after redirect');
+	it('Checks if the account info gets stored in local storage');
+	it('Checks if charts get rendered properly');
+});
