@@ -15,7 +15,7 @@ class PortfolioHandler {
 		$this->headers = [
 				'Content-Type'  => 'application/json',
 			 	'Authorization' => 'Bearer '.$this->config['bearer_token'],
-				'Referer'       => 'test-server'	
+				'Referer'       => 'test-server'
 		];
 		$this->client = new Client(['base_uri' => $this->config['base_url'], 'headers' => $this->headers]);
 	}

@@ -32,8 +32,12 @@
 
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-6 col-md-4 sidebar" id="side_navbar">
+        <div class="col-sm-6 col-md-4 sidebar pagination-centered" id="side_navbar">
 	<!-- Side navbar -->
+			<div class="navbar-content pagination-centered">
+			<h2> Welcome back, <div class="user-name"> Rosie {{ user.name }} </div></h2>
+			<p> This is your current portfolio data.</p>
+			</div>
         </div>
         <div class="col-sm-6 col-sm-offset-6 col-md-8 col-md-offset-4 main">
 	 <div class="row"> 
@@ -46,16 +50,16 @@
 	 <span style="border-bottom: 1px solid #eee;"></span>
          <div class="row placeholders">
             <div class="col-xs-6 col-sm-3 ">
-              <span><a id="overall_btn" class="btn btn-default" href="#!overall">Overall Portfolio</a></span>
+              <span><a id="overall_btn" class="btn btn-default nav-buttons" href="#!overall">Overall Portfolio</a></span>
             </div>
             <div class="col-xs-6 col-sm-3 ">
-              <span><a id="allocation_btn" class="btn btn-default" href="#!allocation">Portfolio Allocation</a></span>
+              <span><a id="allocation_btn" class="btn btn-default nav-buttons" href="#!allocation">Portfolio Allocation</a></span>
             </div>
             <div class="col-xs-6 col-sm-3 ">
-              <span ><a id="investments_btn" class="btn btn-default" href="#!investments">List of Investments</a></span>
+              <span ><a id="investments_btn" class="btn btn-default nav-buttons" href="#!investments">List of Investments</a></span>
             </div>
             <div class="col-xs-6 col-sm-3 ">
-              <span><a id="historical_btn" class="btn btn-default" href="#!historical">Historical Performance</a></span>
+              <span><a id="historical_btn" class="btn btn-default nav-buttons" href="#!historical">Historical Performance</a></span>
             </div>
           </div>
 

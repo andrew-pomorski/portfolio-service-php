@@ -22,6 +22,17 @@ Route::group(['middleware' => 'web'], function () {
 	Route::get('/getmarketshare', 'PortfolioDataController@getMarketShare');
 });
 
+// add middleware => auth to authenticate
+Route::group(['prefix' => 'portfolio_api'], function(){
+	Route::get('/current_data', 'PortfolioAPIController@getCurrent');
+	Route::get('/historic_data','PortfolioAPIController@getHistoric' );
+	Route::get('/account_info', 'PortfolioAPIController@getAccInfo');
+	Route::get('/market_share', 'PortfolioAPIController@getMarketShare');
+		
+});
+
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

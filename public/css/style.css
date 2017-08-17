@@ -21,6 +21,12 @@ body {
 }
 
 
+
+.active {
+	background-color: #2fb56c !important;
+	color: white !important;	
+}
+
 /*
  * Global add-ons
  */
@@ -50,8 +56,30 @@ body {
 }
 
 
+/*
+ * Navbar content
+ *
+ */
 
+.navbar-content {
+      width: 300px;
+      height: 200px;
+      /*
+      width: 100%;
+      height: auto;
+      margin-left: auto;
+      margin-right: auto;
+      */
+      padding: 10px;
+      /* bottom: 0; */
+      position: absolute;
+      color: #fff !important;
+	/* positioning */
+}
 
+.navbar-content > .user-name {
+     font-weight: 600;
+}
 
 .navbar {
 	background-color: #414042;
@@ -136,21 +164,3 @@ body {
   text-decoration: underline;
 }
 
-/*
- * Placeholder dashboard ideas
- */
-
-.placeholders {
-  margin-bottom: 30px;
-  text-align: center;
-}
-.placeholders h4 {
-  margin-bottom: 0;
-}
-.placeholder {
-  margin-bottom: 20px;
-}
-.placeholder img {
-  display: inline-block;
-  border-radius: 50%;
-}
