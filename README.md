@@ -8,7 +8,7 @@ The basic auth for this app is the default one, scaffolded by Laravel.
 
 In routes/web.php there are two route groups: **web** and **portfolio_api**
 
-* Web routes are used for returning views and are protected with : **TODO**
+* Web routes are used for returning views and are protected with basic Laravel Authentication.
 
 
 * Portfolio routes are used for the JSON API and are protected with Laravel Auth and Middleware.
@@ -21,6 +21,24 @@ Ths middleware is located in
 app/Http/Middleware/VerifyClientId.php
 ```
 
+```
+public function handle($request, Closure $next){
+	$auth_user = Auth::user();
+	if (!$user) {
+		return redirect('/');
+	}
+	$internal_user = DB::table('user_verify')->where('auth_user_id', $auth_user->id)->first();
+	$client_id = $internal_user->userId();
+	if ($client_id != $request->clientId){
+		return redirect('/');
+	}
+	return $next($request);
+}
+```
+
+It takes the ID of current user and compares it to the UniqueId in "user_verify" table.
+If they don't match user is redirected to '/' root path. 
+
 ### Auth routes 
 
 To create new account use /register route and then /login to sign in.
@@ -31,4 +49,89 @@ To create new account use /register route and then /login to sign in.
 
 There is a whole test suite, along with a template for any other HTTP service tests. It uses mocha and chai for making requests and assertions.
 It's available [here](https://github.com/andrew-pomorski/http-api-tests) 
+
+
+## Requests
+
+There are 4 **API routes** and 4 **web routes**.
+
+### API routes
+
+**User needs to be authenticated through [security service]() in order to make a request.**
+
+#### Current Data
+
+This route returns JSON with current portfolio data 
+
+```
+/portfolio_api/current_data?clientId=<< client id >>
+```
+
+Example response
+
+```
+[  
+   {  
+      "Country":"UK",
+      "Ticker":"GBP",
+      "Shares":1,
+      "MarkPrice":1,
+      "Value":1,
+      "Percentage":0.02024171645707213,
+      "Name":"Cash in GBP",
+      "SecCode":"FX"
+   },
+   {  
+      "Country":"UK",
+      "Ticker":"GLTL",
+      "Shares":2,
+      "MarkPrice":65.91,
+      "Value":131.82,
+      "Percentage":2.668263063371248,
+      "Name":"",
+      "SecCode":""
+   },
+	...
+]
+``` 
+#### Historic Data
+
+This route returns JSON with historic data, and takes optional parameter (days) - the amount of days to show - this parameter defaults to 180.
+
+```
+/portfolio_api/historic_data?clientId=<< client id >>&days=<< amount of days >>
+```
+
+Example response
+
+```
+[  
+   {  
+      "Country":"UK",
+      "Date":"2017-02-20T00:00:00Z",
+      "Value":4863.514999999999,
+      "Cash":0,
+      "Total":4863.514999999999
+   },
+   {  
+      "Country":"UK",
+      "Date":"2017-02-21T00:00:00Z",
+      "Value":4872.4400000000005,
+      "Cash":0,
+      "Total":4872.4400000000005
+   },
+   {  
+      "Country":"UK",
+      "Date":"2017-02-22T00:00:00Z",
+      "Value":4864.555,
+      "Cash":0,
+      "Total":4864.555
+   },
+	...
+]
+```
+### Account info
+
+
+
 
