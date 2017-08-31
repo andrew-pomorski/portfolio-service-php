@@ -50,8 +50,8 @@
 
     	<div class="sidebar-wrapper">
             <div class="logo">
-                <a href="http://www.creative-tim.com" class="simple-text">
-		 	Hello, <br><% user.FirstName %>
+                <a class="simple-text">
+		 	<img src="img/LogoWhiteTrans.png" alt="Brite" style="height: 50px; width: auto;"/>
 		</a>
             </div>
 
@@ -94,7 +94,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">What not</a>
+                    <!-- <a class="navbar-brand" href="#">Brite</a> -->
                 </div>
                 <div class="collapse navbar-collapse">
                     <!--
@@ -105,14 +105,15 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                           <a href="#">
-                               Account
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Log out
-                            </a>
+				<a href="{{ route('logout') }}"
+				onclick="event.preventDefault();
+				document.getElementById('logout-form').submit();">
+				Logout
+				</a>
+
+				<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+				{{ csrf_field() }}
+				</form>
                         </li>
                     </ul>
                 </div>

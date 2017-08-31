@@ -11,14 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-	return View::make('index');
-});
-
-
 // TODO: Redirect to this route
-Route::get('/webdashboard', function(){
-	return View::make('dashboard2/new_dashboard');
+Route::group(['middleware' => 'auth'], function(){
+	Route::get('/', 'DashboardController@getDashboard');
+	//Route::get('/webdashboard', 'DashboardController@getDashboard');
+
 });
 
 //Route::get('/testauth', 'CompareCredentialsController@comparePasswordWithHash');
