@@ -29,6 +29,7 @@ Route::group(['middleware' => 'web'], function () {
 });
 
 // add middleware => auth to authenticate
+/**
 Route::group(['prefix' => 'portfolio_api'], function(){
 	Route::get('/current_data', 'PortfolioAPIController@getCurrent');
 	Route::get('/historic_data','PortfolioAPIController@getHistoric' );
@@ -36,7 +37,7 @@ Route::group(['prefix' => 'portfolio_api'], function(){
 	Route::get('/market_share', 'PortfolioAPIController@getMarketShare');
 		
 });
-
+**/
 
 
 Auth::routes();
