@@ -1,9 +1,10 @@
 var portfolioApp = angular.module('portfolioService', ['ngRoute']);
 
 
-var base_api_url = 'http://staging-portfolio.briteinvest.com';
-
-
+//var base_api_url = 'http://staging-portfolio.briteinvest.com';
+var base_api_url = 'http://54.169.103.250';
+// TODO: Fix this.
+var client_id = 'test@briteinvest.com';
 portfolioApp.config(function($routeProvider){
 	$routeProvider
 		.when('/', {
@@ -34,7 +35,7 @@ portfolioApp.run(['$http', '$rootScope', function($http, $rootScope){
 	$rootScope.AccountInfo = {};
 	$http({
 		method: 'GET',
-		url: base_api_url + '/getaccinfo?clientId=d89248d0-05d4-11e6-8cf6-05443d8c1614',
+		url: base_api_url + '/getaccinfo?clientId=' + client_id,
 	}).then(function successCallback(response){
 		$rootScope.AccountInfo = response.data;	
 		localStorage.setItem('userData', JSON.stringify(response.data));
@@ -54,7 +55,7 @@ portfolioApp.controller('historicalController', ['$scope', '$rootScope', '$http'
 	$http({
 		cache: true,
 		method: 'GET',
-		url: base_api_url + '/gethistorical?clientId=d89248d0-05d4-11e6-8cf6-05443d8c1614'
+		url: base_api_url + '/gethistorical?clientId=' + client_id,
 	}).then(function successCallback(res){
 		var chartDataValue = [];
 		var chartDataLabels = [];
@@ -66,15 +67,17 @@ portfolioApp.controller('historicalController', ['$scope', '$rootScope', '$http'
 			chartDataObjDate.push(new Date(res.data[i].Date))
 		}
 		var ctx_total = document.getElementById('historical_chart_total').getContext('2d');
-		ctx_total.canvas.height = 300;
-		ctx_total.canvas.width = 900;
+		//ctx_total.canvas.height = 300;
+		//ctx_total.canvas.width = 900;
+		console.log("historical new log \n");
+		console.log(res.data);
+		// TODO Build dataset array
+			
+		// END
 		var chart = new Chart(ctx_total, {
 			type: 'line',
 			options: {
 				elements: {
-					point: {
-						radius: 0
-					},
 					line: {
 						fill: false
 					}
@@ -82,14 +85,23 @@ portfolioApp.controller('historicalController', ['$scope', '$rootScope', '$http'
 				legend: {
 					display: false,
 					position: 'bottom'
-				},
-				responsive: false,
-				maintainAspectRatio: false,
+				}
+				//responsive: false,
+				//maintainAspectRatio: false,
 			},
 			data: {
-				labels: chartDataLabels,
+				labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
 				datasets: [{
-					data: chartDataValue
+					//data: chartDataValue
+					data: [10, 15, 11, 14, 12, 9, 12, 14, 17, 21],
+					lineTension: 0.1,
+					borderColor: '#e67e22'
+				}, {
+					data: chartDataValue, 
+					lineTension: 0.1,
+					pointBorderWidth: 1,
+					pointHoverRadius: 8,
+					borderColor: '#27ae60'
 				}]
 			}
 		});
@@ -110,9 +122,9 @@ portfolioApp.controller('historicalController', ['$scope', '$rootScope', '$http'
 				legend: {
 					display: false,
 					position: 'bottom'
-				},
-				responsive: false,
-				maintainAspectRatio: false,
+				}
+				//responsive: false,
+				//maintainAspectRatio: false,
 			},
 			data: {
 				labels: chartDataLabels,
@@ -131,20 +143,27 @@ portfolioApp.controller('overallCtrl', ['$scope', '$rootScope', '$http', functio
 	$http({
 		cache: true,
 		method: 'GET',
-		url: base_api_url + '/gethistorical?clientId=d89248d0-05d4-11e6-8cf6-05443d8c1614',
+		url: base_api_url + '/getportfolio?clientId=' + client_id,
 	}).then(function successCallback(response){
 		// TODO: loop throug response obj and append to arr.
 		var chartDataValue = [];
 		var chartDataDates = [];
+		var chartDataLabels = [];
 		var arrLen = response.data.length;
 		for (var i = 0; i < arrLen; i++){
-			chartDataValue.push(response.data[i].Value);
+			chartDataLabels.push(response.data[i].Ticker);
+			chartDataValue.push(Math.round(response.data[i].Value).toFixed(2));
+			chartDataCash.push(Math.round(response.data.cash.USD.Value).toFixed(2));
 			// (a=new Date("2016-08-16T00:00:00Z"),`${a.getMonth()}/${a.getFullYear()}`) 
-			chartDataDates.push((a = new Date(response.data[i].Date), `${a.getMonth()}/${a.getFullYear()}`));
+			//chartDataDates.push((a = new Date(response.data[i].Date), `${a.getMonth()}/${a.getFullYear()}`));
 		}
+		console.log("Whole res dump:" + JSON.stringify(response.data))
+		console.log("New overall debug (value): " + chartDataValue)
+		console.log("New overall debug (dates): " + chartDataDates)
+		console.log("New overall debug (cash): " + response.data.cash.USD[0].Value)
+		var chartDataCash =  response.data.cash.USD[0].Value;
+		var chartDataNonCash = response.data.noncash.USD[0].Value;
 		var ctx = document.getElementById('overall_chart').getContext('2d');
-		ctx.canvas.height = 300;
-		ctx.canvas.width = 900;
 		var chart = new Chart(ctx, {
 			type: 'line',
 			options: {
@@ -156,14 +175,18 @@ portfolioApp.controller('overallCtrl', ['$scope', '$rootScope', '$http', functio
 				legend: {
 					display: false,
 					position: 'bottom'
-				},
-				responsive: false,
-				maintainAspectRatio: false,
+				}
+				//responsive: false,
+				//maintainAspectRatio: false,
 			},
 			data: {
-				labels: chartDataDates,
+				labels: chartDataLabels,
 				datasets: [{
-					data: chartDataValue,
+					label: 'Cash',
+					data: Array.from(chartDataCash)
+				},{
+					label: 'Non-Cash',
+					data: Array.from(chartDataNonCash)
 				}]
 
 			}
@@ -180,9 +203,11 @@ portfolioApp.controller('allocationCtrl', ['$scope', '$http', function($scope, $
 	$http({
 		cache: true,
 		method: 'GET',
-		url: base_api_url + '/getmarketshare?clientId=d89248d0-05d4-11e6-8cf6-05443d8c1614',
+		url: base_api_url + '/getmarketshare?clientId=' + client_id,
 	}).then(function successCallback(response){
-		console.log(response.data.Developed_Markets);	
+		console.log('market share callback');
+		console.log(response.data.Developed_Markets);
+		console.log(response.data)	
 		// TODO: Initialize a chart here.
 		var ctx = document.getElementById('allocation_chart').getContext('2d');
 		ctx.canvas.height = 500;
@@ -191,29 +216,40 @@ portfolioApp.controller('allocationCtrl', ['$scope', '$http', function($scope, $
 			type: 'doughnut',
 			options: {
 				legend: {
-					display: true,
-					position: 'right'
+					display: false,
+					position: 'top'
 				},
 				responsive: false,
 				MaintainAspectRatio: false
 			},
 			data: {
-				labels: ['Developed Markets', 'Domestic Markets', 'Fixed Income'],
+				labels: ['Fixed Income', 'Other', 'Emerging Markets', 'Domestic Markets', 'Developed Markets', 'Commodities'],
 				datasets: [{
 					data: [
-						Math.round(response.data.Developed_Markets * 100) / 100 , 
-						Math.round(response.data.Domestic_Markets * 100) / 100, 
-						Math.round(response.data.Fixed_Income * 100) /100
+						//Math.round(response.data.Developed_Markets * 100) / 100 , 
+						//Math.round(response.data.Domestic_Markets * 100) / 100, 
+						Math.round(response.data.Fixed_Income * 100) /100,
+						Math.round(response.data.Other * 100) /100,
+						Math.round(response.data.Emerging_Markets * 100) /100,
+						Math.round(response.data.Domestic_Markets * 100) /100,
+						Math.round(response.data.Developed_Markets * 100) /100,
+						Math.round(response.data.Commodities * 100) /100,
 					],
 					backgroundColor: [
 						'#FF6384',
 						'#36A2EB',
-						'#FFCE56'
+						'#FFCE56',
+						'#9b59b6',
+						'#2ecc71',
+						'#f1c40f'
 					], 
 					hoverBackgroundColor: [
 						'#FF6384',
 						'#36A2EB',
-						'#FFCE56'
+						'#FFCE56',
+						'#9b59b6',
+						'#2ecc71',
+						'#f1c40f'
 					] 
 				}],
 				
@@ -228,12 +264,14 @@ portfolioApp.controller('investmentsCtrl', ['$scope', '$http', '$rootScope', fun
 	$scope.page.CV = "Investments List";
 	$scope.currency = $rootScope.AccountInfo.Currency; 
 	$scope.data = {};
+	console.log('investments list ctrl debug');
 	$http({
 		cache: true,
 		method: 'GET',
-		url: 'http://staging-portfolio.briteinvest.com/getportfolio?clientId=d89248d0-05d4-11e6-8cf6-05443d8c1614',
+		url: base_api_url + '/getinvestments?clientId=' + client_id,
 	}).then(function successCallback(response){
 		$scope.data = response.data;
+		console.log("INVESTMENTS LIST: " + JSON.stringify(response.data));
 	}, function errorCallback(response){
 		console.log("Error in callback (2nd)");	
 	});

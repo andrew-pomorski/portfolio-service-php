@@ -24,10 +24,15 @@ class PortfolioHandler {
 
 	public function RequestData($client_id){
 		$query = ['clientid' => $client_id];
-		$response = $this->client->request('GET', 'current', ['query' => $query]);
+		$response = $this->client->request('GET', 'overall', ['query' => $query]);
 		return $response->getBody();
 	}
 
+	public function RequestInvestmentsList($client_id){
+		$query = ['clientid' => $client_id];
+		$response = $this->client->request('GET', 'current', ['query' => $query]);
+		return $response->getBody();
+	}
 	
         public function RequestHistoricalData($client_id, $days) {
 		$query = ['clientid' => $client_id, 'days' => $days];

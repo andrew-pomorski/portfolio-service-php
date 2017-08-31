@@ -8,6 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\Handlers\PortfolioHandler;
+use Illuminate\Support\Facades\Auth;
 
 class PortfolioDataController extends BaseController
 {
@@ -15,45 +16,35 @@ class PortfolioDataController extends BaseController
 
     public function __construct(){
 	$this->PortfolioHandler = new PortfolioHandler();
+    	if (Auth::check()){
+		$user = Auth::user();
+		$this->user_email = $user->email;
+	}
     }
 
     public function getPortfolioData(Request $req){
-		if ($req->has('clientId')){
-			$portfolio = $this->PortfolioHandler->RequestData($req->clientId);	
-			return $portfolio;
-		} else {
-			return "ClientID not found. Quitting.";
-		}
+		$portfolio = $this->PortfolioHandler->RequestData($this->user_email);	
+		return $portfolio;
     }
 
     public function getHistoricalData(Request $req){
-		if ($req->has('clientId')){
-			$req->has('days') ? $days = $req->days : $days = 365;
-			$portfolio = $this->PortfolioHandler->RequestHistoricalData($req->clientId, $days);
-			return $portfolio;
-		} else {
-			return "ClientID not found. Quitting.";
-		}
-
+		$portfolio = $this->PortfolioHandler->RequestHistoricalData($this->user_email, 365);
+		return $portfolio;
     }
 
 
     public function getAccountInfo(Request $req) {
-		if ($req->has('clientId')){
-			$portfolio = $this->PortfolioHandler->RequestAccountData($req->clientId);
-			return $portfolio;
-		} else {
-			return "ClientID not found. Quitting.";
-		}
-	
+		$portfolio = $this->PortfolioHandler->RequestAccountData($this->user_email);
+		return $portfolio;
     }
 
     public function getMarketShare(Request $req) {
-		if ($req->has('clientId')){
-			$portfolio = $this->PortfolioHandler->getMarketShare($req->clientId);
-			return $portfolio;
-		} else {
-			return "ClientID not found. Quitting.";
-		}
+		$portfolio = $this->PortfolioHandler->getMarketShare($this->user_email);
+		return $portfolio;
     }
+   
+    public function getInvestmentsList(Request $req) {
+		$portfolio = $this->PortfolioHandler->RequestInvestmentsList($this->user_email);
+		return $portfolio;
+   }
 }

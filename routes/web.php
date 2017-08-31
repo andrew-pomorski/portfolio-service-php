@@ -15,11 +15,20 @@ Route::get('/', function () {
 	return View::make('index');
 });
 
+
+// TODO: Redirect to this route
+Route::get('/webdashboard', function(){
+	return View::make('dashboard2/new_dashboard');
+});
+
+//Route::get('/testauth', 'CompareCredentialsController@comparePasswordWithHash');
+
 Route::group(['middleware' => 'web'], function () {
 	Route::get('/getportfolio', 'PortfolioDataController@getPortfolioData');
 	Route::get('/gethistorical', 'PortfolioDataController@getHistoricalData');
 	Route::get('/getaccinfo', 'PortfolioDataController@getAccountInfo');
 	Route::get('/getmarketshare', 'PortfolioDataController@getMarketShare');
+	Route::get('/getinvestments', 'PortfolioDataController@getInvestmentsList');
 });
 
 // add middleware => auth to authenticate
@@ -32,6 +41,10 @@ Route::group(['prefix' => 'portfolio_api'], function(){
 });
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 

@@ -1,0 +1,22 @@
+.nav-btn-row {
+	margin-bottom: 50px;
+}
+.btn-portfolio-nav {
+	border-radius: 0;
+	padding: 5px 20px;
+	margin: 5px;
+}
+
+.btn-portfolio-nav:hover{
+	background-color: #2fb56c;
+	color: white;
+	border-color: #2fb56c;
+}
+.main-charts-row {
+	width: 70%;
+	margin: 0 auto;
+}
+
+.text-center {
+	text-align: center;
+}
