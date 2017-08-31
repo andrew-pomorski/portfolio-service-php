@@ -69,10 +69,34 @@ portfolioApp.controller('historicalController', ['$scope', '$rootScope', '$http'
 		var ctx_total = document.getElementById('historical_chart_total').getContext('2d');
 		//ctx_total.canvas.height = 300;
 		//ctx_total.canvas.width = 900;
-		console.log("historical new log \n");
-		console.log(res.data);
+		var rawHistoricalArray = res.data;
+		var HistoryData = {};
+		var HistoricalDatasets = [];
+		var HistoricalLabels = [];
+		var dataSetsFinal =  [];
+		var dataKeyArray = [];
+		var colorsArray = ['#1abc9c', '#2ecc71', '#3498db', '#9b59b6', '#f1c40f', '#e67e22', '#e74c3c'];
 		// TODO Build dataset array
-			
+		var colorIndex = 0;
+		for (var key in rawHistoricalArray){
+			HistoryData[key] = rawHistoricalArray[key];
+			for (var inKey in rawHistoricalArray[key]) {
+				console.log("Value:  :" + HistoryData[key][inKey]['Value'] );
+				if (!HistoryData[key][inKey]['Value'] == 0) {
+					dataKeyArray.push(HistoryData[key][inKey]['Value']);
+				}
+				if (!HistoryData[key][inKey]['FundName'] == '') {
+					HistoricalLabels.push(HistoryData[key][inKey]['FundName']);
+				}
+				
+				dataSetsFinal.push({
+					data: dataKeyArray,
+					borderColor: colorsArray[colorIndex % colorsArray.length]
+				});
+			}
+			colorIndex++;
+		}
+		console.log("dataSets after iteration:" + JSON.stringify(dataSetsFinal) );
 		// END
 		var chart = new Chart(ctx_total, {
 			type: 'line',
@@ -90,19 +114,8 @@ portfolioApp.controller('historicalController', ['$scope', '$rootScope', '$http'
 				//maintainAspectRatio: false,
 			},
 			data: {
-				labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
-				datasets: [{
-					//data: chartDataValue
-					data: [10, 15, 11, 14, 12, 9, 12, 14, 17, 21],
-					lineTension: 0.1,
-					borderColor: '#e67e22'
-				}, {
-					data: chartDataValue, 
-					lineTension: 0.1,
-					pointBorderWidth: 1,
-					pointHoverRadius: 8,
-					borderColor: '#27ae60'
-				}]
+				labels: HistoricalLabels,
+				datasets: dataSetsFinal 
 			}
 		});
 		var ctx_diff = document.getElementById('historical_chart_diff').getContext('2d');
@@ -216,8 +229,8 @@ portfolioApp.controller('allocationCtrl', ['$scope', '$http', function($scope, $
 			type: 'doughnut',
 			options: {
 				legend: {
-					display: false,
-					position: 'top'
+					display: true,
+					position: 'bottom'
 				},
 				responsive: false,
 				MaintainAspectRatio: false
