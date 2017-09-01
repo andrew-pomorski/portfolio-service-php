@@ -3,11 +3,11 @@ var portfolioApp = angular.module('portfolioService', ['ngRoute']);
 
 var base_api_url = 'https://dashboard.briteinvest.com';
 // TODO: Fix this.
-var client_id = 'test@briteinvest.com';
+var client_id = '';
 portfolioApp.config(function($routeProvider){
 	$routeProvider
 		.when('/', {
-			templateUrl : 'templates/overall.html',
+			templateUrl : 'templates/allocation.html',
 			controller  : 'overallCtrl'
 		})
 		.when('/historical', {
@@ -34,7 +34,7 @@ portfolioApp.run(['$http', '$rootScope', function($http, $rootScope){
 	$rootScope.AccountInfo = {};
 	$http({
 		method: 'GET',
-		url: base_api_url + '/getaccinfo?clientId=' + client_id,
+		url: base_api_url + '/gethistorical',
 	}).then(function successCallback(response){
 		$rootScope.AccountInfo = response.data;	
 		localStorage.setItem('userData', JSON.stringify(response.data));
@@ -84,7 +84,7 @@ portfolioApp.controller('historicalController', ['$scope', '$rootScope', '$http'
 			for (var inKey in rawHistoricalArray[key]) {
 				console.log("Value:  :" + HistoryData[key][inKey]['Value'] );
 				if (!HistoryData[key][inKey]['Value'] == 0) {
-					dataKeyArray.push(HistoryData[key][inKey]['Value']);
+					dataKeyArray.push(Math.round(HistoryData[key][inKey]['Value']).toFixed(2));
 				}
 				if (!HistoryData[key][inKey]['FundName'] == '') {
 					HistoricalLabels.push(HistoryData[key][inKey]['FundName']);
@@ -94,11 +94,14 @@ portfolioApp.controller('historicalController', ['$scope', '$rootScope', '$http'
 				
 				dataSetsFinal.push({
 					data: dataKeyArray,
-					borderColor: colorsArray[colorIndex % colorsArray.length]
+					borderColor: colorsArray[colorIndex % colorsArray.length],
+					pointRadius: 1.5,
+					pointHoverRadius: 1.5
 				});
 			}
 			colorIndex++;
 		}
+		console.log("DATA:" + JSON.stringify(dataSetsFinal));
 		// END
 		var chart = new Chart(ctx_total, {
 			type: 'line',
@@ -111,6 +114,13 @@ portfolioApp.controller('historicalController', ['$scope', '$rootScope', '$http'
 				legend: {
 					display: false,
 					position: 'bottom'
+				},
+				scales: {
+					xAxes: [{
+						gridLines: {
+							display: false	
+						}
+					}]
 				}
 				//responsive: false,
 				//maintainAspectRatio: false,
@@ -224,17 +234,17 @@ portfolioApp.controller('allocationCtrl', ['$scope', '$http', function($scope, $
 		console.log(response.data)	
 		// TODO: Initialize a chart here.
 		var ctx = document.getElementById('allocation_chart').getContext('2d');
-		ctx.canvas.height = 500;
-		ctx.canvas.width = 500;
+		//ctx.canvas.height = 500;
+		//ctx.canvas.width = 500;
 		var chart = new Chart(ctx, {
 			type: 'doughnut',
 			options: {
 				legend: {
 					display: true,
 					position: 'bottom'
-				},
-				responsive: false,
-				MaintainAspectRatio: false
+				}
+				//responsive: ,
+				//MaintainAspectRatio: false
 			},
 			data: {
 				labels: ['Fixed Income', 'Other', 'Emerging Markets', 'Domestic Markets', 'Developed Markets', 'Commodities'],

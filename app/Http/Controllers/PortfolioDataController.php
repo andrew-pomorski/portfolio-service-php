@@ -37,7 +37,7 @@ class PortfolioDataController extends BaseController
 		if (Auth::check()){
 			$user = Auth::user();
 			$email  =  $user->email;
-			$portfolio = $this->PortfolioHandler->RequestHistoricalData($email, 365);
+			$portfolio = $this->PortfolioHandler->RequestHistoricalData($email, 90);
 			return $portfolio;
 		}
     }
