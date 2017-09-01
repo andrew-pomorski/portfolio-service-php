@@ -77,6 +77,8 @@ portfolioApp.controller('historicalController', ['$scope', '$rootScope', '$http'
 		var colorsArray = ['#1abc9c', '#2ecc71', '#3498db', '#9b59b6', '#f1c40f', '#e67e22', '#e74c3c'];
 		// TODO Build dataset array
 		var colorIndex = 0;
+		var numericLabel = [];
+		var i = 0;
 		for (var key in rawHistoricalArray){
 			HistoryData[key] = rawHistoricalArray[key];
 			for (var inKey in rawHistoricalArray[key]) {
@@ -86,6 +88,8 @@ portfolioApp.controller('historicalController', ['$scope', '$rootScope', '$http'
 				}
 				if (!HistoryData[key][inKey]['FundName'] == '') {
 					HistoricalLabels.push(HistoryData[key][inKey]['FundName']);
+					i++;
+					numericLabel.push(i);
 				}
 				
 				dataSetsFinal.push({
@@ -95,7 +99,6 @@ portfolioApp.controller('historicalController', ['$scope', '$rootScope', '$http'
 			}
 			colorIndex++;
 		}
-		console.log("dataSets after iteration:" + JSON.stringify(dataSetsFinal) );
 		// END
 		var chart = new Chart(ctx_total, {
 			type: 'line',
@@ -113,7 +116,8 @@ portfolioApp.controller('historicalController', ['$scope', '$rootScope', '$http'
 				//maintainAspectRatio: false,
 			},
 			data: {
-				labels: HistoricalLabels,
+				//labels: HistoricalLabels,
+				labels: numericLabel,
 				datasets: dataSetsFinal 
 			}
 		});
@@ -171,10 +175,6 @@ portfolioApp.controller('overallCtrl', ['$scope', '$rootScope', '$http', functio
 			// (a=new Date("2016-08-16T00:00:00Z"),`${a.getMonth()}/${a.getFullYear()}`) 
 			//chartDataDates.push((a = new Date(response.data[i].Date), `${a.getMonth()}/${a.getFullYear()}`));
 		}
-		console.log("Whole res dump:" + JSON.stringify(response.data))
-		console.log("New overall debug (value): " + chartDataValue)
-		console.log("New overall debug (dates): " + chartDataDates)
-		console.log("New overall debug (cash): " + response.data.cash.USD[0].Value)
 		var chartDataCash =  response.data.cash.USD[0].Value;
 		var chartDataNonCash = response.data.noncash.USD[0].Value;
 		var ctx = document.getElementById('overall_chart').getContext('2d');
