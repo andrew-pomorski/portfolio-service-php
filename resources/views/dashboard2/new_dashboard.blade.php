@@ -32,7 +32,8 @@
 
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <!-- <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'> -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700" rel="stylesheet">
     <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
 
 </head>
@@ -54,7 +55,12 @@
 		 	<img src="img/LogoWhiteTrans.png" alt="Brite" style="height: 50px; width: auto;"/>
 		</a>
             </div>
-
+		<ul class="nav">
+			<li>
+			<a><p>Welcome to your Portfolio</p></a>
+			</li>
+		</ul>
+	   <!-- 
             <ul class="nav">
                 <li>
                     <a href="#">
@@ -81,6 +87,7 @@
                     </a>
                 </li>
             </ul>
+	   -->
     	</div>
     </div>
 
@@ -147,34 +154,15 @@
 
 
         <footer class="footer">
-            <div class="container-fluid">
+            <div class="container-fluid footer-brite">
                 <nav class="pull-left">
-                    <ul>
-                        <li>
-                            <a href="#">
-                               Legal 
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                            	Stuff 
-			    </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                            	Goes
-			    </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                               Here
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-                <p class="copyright pull-right">
-                    &copy; <?php echo date("Y"); ?> <a href="https://www.briteinvest.com">Brite Invest</a>   
-                </p>
+                	<p class="text-center footer-text">
+				Brite is powered in Australia by Brite Advisors Pty Ltd, company number 135024412, by their Australian Financial Services Licence, number 337670. We are located at Shop 4, 1-5 Piper Street, Caboolture, QLD, 4510.
+			</p>
+			<p class="text-center footer-text">
+				Brite is powered in Hong Kong by Watermill Advisors Limited, company number 1633223, by their Securities and Futures Commission Licence, number AYD086. We are located at Unit A, 16/F, Harbourfront House, 35-36 Connaught Road West, Sheung Wan, Hong Kong.	
+			</p>
+		</nav>
             </div>
         </footer>
 

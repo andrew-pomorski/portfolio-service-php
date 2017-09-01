@@ -121,6 +121,7 @@ portfolioApp.controller('historicalController', ['$scope', '$rootScope', '$http'
 		var ctx_diff = document.getElementById('historical_chart_diff').getContext('2d');
 		ctx_diff.canvas.height = 300;
 		ctx_diff.canvas.width = 900;
+		/**
 		var chart_diff = new Chart(ctx_diff, {
 			type: 'line',
 			options: {
@@ -146,6 +147,7 @@ portfolioApp.controller('historicalController', ['$scope', '$rootScope', '$http'
 				}]
 			}
 		});
+		**/
 
 	});
 }]);
