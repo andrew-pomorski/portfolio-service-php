@@ -5,8 +5,9 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"> </script>
     	<script src="node_modules/angular-route/angular-route.js"></script>
-	<link rel="icon" type="image/png" href="assets/img/favicon.ico">
+	<link rel="icon" type="image/png" href="img/Logo.ico">
     	<script src="js/portfolioCtrl.js"></script>
+	<script src="https://use.fontawesome.com/db70d6b459.js"></script>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 	<title>Portfolio Dashboard</title>
@@ -40,7 +41,8 @@
 <body ng-app="portfolioService" ng-controller="mainCtrl">
 
 <div class="wrapper">
-    <div class="sidebar" data-color="green" data-image="assets/img/sidebar-5.jpg">
+    <div class="sidebar" data-color="britegreen" data-image="assets/img/sidebar-5.jpg">
+
 
     <!--
 
@@ -52,42 +54,34 @@
     	<div class="sidebar-wrapper">
             <div class="logo">
                 <a class="simple-text">
-		 	<img src="img/LogoWhiteTrans.png" alt="Brite" style="height: 50px; width: auto;"/>
+		 	<img src="img/LogoWhiteTrans.png" alt="Brite" style="height: 30px; width: auto;"/>
 		</a>
             </div>
-		<ul class="nav">
-			<li>
-			<a><p>Welcome to your Portfolio</p></a>
-			</li>
-		</ul>
-	   <!-- 
+		  <!-- <div class="" style="margin-top: 25px;">
+			  <p class="subtitle fancy"><span>Welcome to your portfolio</span></p>
+		  </div> -->
             <ul class="nav">
                 <li>
-                    <a href="#">
-                        <i class="pe-7s-graph"></i>
-                        <p>Place</p>
+                    <a href="#!allocation" id="allocation">
+                        <!-- <i class="pe-7s-graph"></i> -->
+			<i class="fa fa-pie-chart" aria-hidden="true"></i>
+                        <p>Portfolio Allocation</p>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
-                        <i class="pe-7s-user"></i>
-                        <p>For</p>
+                    <a href="#!investments" id="investments">
+			<i class="fa fa-list" aria-hidden="true"></i>
+                        <p>List of Investments</p>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
-                        <i class="pe-7s-note2"></i>
-                        <p>Legal</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="pe-7s-news-paper"></i>
-                        <p>Footer</p>
+                    <a href="#!historical" id="historical">
+                        <!-- <i class="pe-7s-note2"></i> -->
+			<i class="fa fa-line-chart" aria-hidden="true"></i>
+                        <p>Historical Performance</p>
                     </a>
                 </li>
             </ul>
-	   -->
     	</div>
     </div>
 
@@ -101,21 +95,21 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <!-- <a class="navbar-brand" href="#">Brite</a> -->
+                    <a id="currently_viewing" style="margin: 10px;" class="navbar-brand"></a>
                 </div>
                 <div class="collapse navbar-collapse">
-                    <!--
-			TODO: might be useful later... 
-			<ul class="nav navbar-nav navbar-left">
-                    	</ul>
-		    -->
+                   	<!-- 
+			<ul id="currently_viewing" class="nav navbar-nav navbar-left">
+			</ul>
+			-->
+		    
 
                     <ul class="nav navbar-nav navbar-right">
                         <li>
 				<a href="{{ route('logout') }}"
 				onclick="event.preventDefault();
 				document.getElementById('logout-form').submit();">
-				Logout
+				 <i class="fa fa-lock logout-icon" aria-hidden="true"></i>&nbsp;Logout
 				</a>
 
 				<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -130,17 +124,18 @@
 
         <div class="content">
             <div class="container-fluid">
+		<!-- btn row
 		<div class="row nav-btn-row">
 			<div class="text-center col-md-12 col-sm-12 col-lg-12 col-xs-12">
-				<!-- <a id="overall" type="button" class="btn btn-portfolio-nav" href="#!overall">Overall Portfolio</a> -->
 				<a id="allocation" type="button" class="btn btn-portfolio-nav" href="#!allocation">Portfolio Allocation</a>
 				<a id="investments" type="button" class="btn btn-portfolio-nav" href="#!investments">List of Investments</a>
 				<a id="historical" type="button" class="btn btn-portfolio-nav" href="#!historical">Historical Performance</a>
 			</div>
 		</div>
+		// btn row -->
                 <!-- charts area -->
 		<div class="row main-charts-row">
-                	<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 text-center" ng-view="">
+                	<div style="" class="col-md-12 col-sm-12 col-lg-12 col-xs-12 text-center" ng-view="">
 			</div>
 		</div>
 		<!-- //charts area -->
@@ -156,12 +151,14 @@
         <footer class="footer">
             <div class="container-fluid footer-brite">
                 <nav class="pull-left">
+			<div class="text-center" style="width: 75%; margin: 0 auto;">
                 	<p class="text-center footer-text">
 				Brite is powered in Australia by Brite Advisors Pty Ltd, company number 135024412, by their Australian Financial Services Licence, number 337670. We are located at Shop 4, 1-5 Piper Street, Caboolture, QLD, 4510.
 			</p>
 			<p class="text-center footer-text">
 				Brite is powered in Hong Kong by Watermill Advisors Limited, company number 1633223, by their Securities and Futures Commission Licence, number AYD086. We are located at Unit A, 16/F, Harbourfront House, 35-36 Connaught Road West, Sheung Wan, Hong Kong.	
 			</p>
+			</div>
 		</nav>
             </div>
         </footer>
@@ -185,8 +182,6 @@
     <!--  Notifications Plugin    -->
     <script src="assets/js/bootstrap-notify.js"></script>
 
-    <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
     <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
 	<script src="assets/js/light-bootstrap-dashboard.js"></script>
@@ -195,20 +190,30 @@
 	<script src="assets/js/demo.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
+		
+			var FundName = localStorage.getItem('userData');
+			var FundName = JSON.parse(FundName);
+			var FundName = FundName[0].FundName;
+			
+			console.log("local storage: " + JSON.stringify(FundName));
 			$("#overall").on('click', function(){
 				console.log('clicked overall')	
+				$("#currently_viewing").html("");
 			});			
 
 			$("#allocation").on('click', function(){
 				console.log('clicked allocation')	
+				$("#currently_viewing").html("Portfolio Allocation");
 			});			
 			
 			$("#investments").on('click', function(){
-				console.log('clicked investments')	
+				console.log('clicked investments');	
+				$("#currently_viewing").html("List of Investments");
 			});
 						
 			$("#historical").on('click', function(){
 				console.log('clicked historical')	
+				$("#currently_viewing").html("Historical Performance");
 			});			
 		});
 	</script>

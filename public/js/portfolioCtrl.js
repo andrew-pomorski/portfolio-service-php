@@ -39,6 +39,7 @@ portfolioApp.run(['$http', '$rootScope', function($http, $rootScope){
 	}).then(function successCallback(response){
 		$rootScope.AccountInfo = response.data;	
 		localStorage.setItem('userData', JSON.stringify(response.data));
+		console.log("Account info: " + JSON.stringify(response.data));
 	}, function failureCallback(response){
 		// TODO: handle that.
 	});
@@ -225,14 +226,23 @@ portfolioApp.controller('allocationCtrl', ['$scope', '$http', function($scope, $
 		console.log(response.data)	
 		// TODO: Initialize a chart here.
 		var ctx = document.getElementById('allocation_chart').getContext('2d');
-		ctx.canvas.height = 500;
-		ctx.canvas.width = 500;
+		ctx.canvas.height = 400;
+		ctx.canvas.width = 400;
 		var chart = new Chart(ctx, {
 			type: 'doughnut',
 			options: {
 				legend: {
 					display: true,
-					position: 'bottom'
+					position: 'bottom',
+					fullWidth: false,
+					labels: {
+						boxWidth: 10,
+						fontSize: 10,
+						padding: 10
+					},
+					onClick: function(e){
+						e.stopPropagation();
+					}
 				},
 				responsive: false,
 				MaintainAspectRatio: false

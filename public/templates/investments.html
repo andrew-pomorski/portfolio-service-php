@@ -8,17 +8,18 @@
 		<th class="text-center">Price &nbsp; {{ currency }}</th>
 		<th class="text-center">Value</th>
 		<th class="text-center"> % </th>
+		<th class="text-center"> Currency </th>
+		<!-- <th class="text-center"> Total </th> -->
          </tr>
-          <thead>
-          <tbody>
-	
+      </thead>
+          <tbody>	
                   <tr ng-repeat="i in data">
                           <td>{{ i.Ticker }}</td>
-                          <!-- <td>{{ i.Name }}</td> -->
                           <td>{{ (i.Shares | number:2 )  }}</td>
                           <td class="markPriceValue">{{ (i.MarkPrice | number:2)  }}</td>
                           <td class="values">{{ i.Value | number:0 }}</td>
                           <td class="percentage" >{{ i.Percentage | number:0}}</td>
+                          <td>{{ i.Currency }}</td>
                   </tr>
        <tbody>
 </table>

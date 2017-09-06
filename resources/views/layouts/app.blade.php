@@ -28,9 +28,9 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                    		Brite
-	            </a>
+                    <a class="navbar-brand" href="{{ url('/') }}" style="padding-top: 0 !important;">
+	            	<img src="img/brite-logo-v2.png"/>
+		    </a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
