@@ -8,8 +8,8 @@ var client_id = 'test@briteinvest.com';
 portfolioApp.config(function($routeProvider){
 	$routeProvider
 		.when('/', {
-			templateUrl : 'templates/investments.html',
-			controller  : 'investmentsCtrl'
+			templateUrl : 'templates/overall.html',
+			controller  : 'historicalController'
 		})
 		.when('/historical', {
 			templateUrl : 'templates/historical.html',
@@ -52,7 +52,6 @@ portfolioApp.controller('mainCtrl',  ['$scope', '$rootScope', '$http', function(
 }]);
 
 portfolioApp.controller('historicalController', ['$scope', '$rootScope', '$http', function($scope, $rootScope, $http){
-	console.log("HISTORICAL CTRL LOADED!");
         $scope.page.CV = "Historical Performance";
 	$http({
 		cache: true,
@@ -104,7 +103,7 @@ portfolioApp.controller('historicalController', ['$scope', '$rootScope', '$http'
 		}
 		console.log("dataSets after iteration:" + JSON.stringify(dataSetsFinal) );
 		// END
-		if ($(window).width() < 700){
+		if ($(window).width() < 480){
 			var chart_height = 200;
 			var chart_width = 300;
 		} else {
@@ -240,7 +239,7 @@ portfolioApp.controller('allocationCtrl', ['$scope', '$http', function($scope, $
 		console.log(response.data)	
 		// TODO: Initialize a chart here.
 		var ctx = document.getElementById('allocation_chart').getContext('2d');
-		if($(window).width() < 700 ){
+		if($(window).width() < 400 ){
 			var size = 250;
 		} else {
 			var size = 400;
@@ -305,7 +304,6 @@ portfolioApp.controller('allocationCtrl', ['$scope', '$http', function($scope, $
 }]);
 
 portfolioApp.controller('investmentsCtrl', ['$scope', '$http', '$rootScope', function($scope, $http, $rootScope){
-	console.log('INVESTMENTS CTRL LOADED');
 	$scope.page.CV = "Investments List";
 	$scope.currency = $rootScope.AccountInfo.Currency; 
 	$scope.data = {};

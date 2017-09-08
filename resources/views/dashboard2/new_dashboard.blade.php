@@ -81,6 +81,18 @@
                         <p>Historical Performance</p>
                     </a>
                 </li>
+		<li class="active-pro">
+			<a href="mailto:support@briteinvest.com?subject=Pension%20">
+				<i class="fa fa-envelope-open-o" aria-hidden="true"></i>
+				<p>Contact Us</p> 
+			</a>
+		</li>
+		<li class="active-pro-tc">
+			<a href="https://briteinvest.com/#/content/legal/disclaimer">
+				<i class="fa fa-info-circle" aria-hidden="true"></i>
+				<p>Terms and Conditions</p> 
+			</a>
+		</li>
             </ul>
     	</div>
     </div>
@@ -95,7 +107,11 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a id="currently_viewing" style="margin: 10px;" class="navbar-brand"></a>
+                    <a id="currently_viewing" style="margin: 10px;" class="navbar-brand">List of Investments</a>
+                    <a id="MONEY" style="margin: 10px; border-left: 1px solid #777;" class="navbar-brand">
+			Total Value: 
+			<span id="totalIcon" class="" aria-hidden="true" style="color: #25b56c;"></span><span id="totalValue" style="color: #25b56c;"></span>
+		    </a>
                 </div>
                 <div class="collapse navbar-collapse">
                    	<!-- 
@@ -135,7 +151,7 @@
 		// btn row -->
                 <!-- charts area -->
 		<div class="row main-charts-row">
-                	<div style="" class="col-md-12 col-sm-12 col-lg-12 col-xs-12 text-center" ng-view="">
+                	<div style="" ng-init="init()" class="col-md-12 col-sm-12 col-lg-12 col-xs-12 text-center vcenter" ng-view="">
 			</div>
 		</div>
 		<!-- //charts area -->
@@ -148,7 +164,7 @@
         </div>
 
 
-        <footer class="footer">
+        <footer class="footer-tc footer">
             <div class="container-fluid footer-brite">
                 <nav class="pull-left">
 			<div class="text-center" style="width: 75%; margin: 0 auto;">
@@ -193,8 +209,16 @@
 		
 			var FundName = localStorage.getItem('userData');
 			var FundName = JSON.parse(FundName);
+			var TotalValue = Math.round(FundName[0].Value + FundName[1].Value).toFixed(2);
+			var Currency = FundName[0].Currency;
 			var FundName = FundName[0].FundName;
-			
+			console.log("Currency debug: " + Currency);
+			if (Currency == 'GBP') {
+				$("#totalIcon").html("&#163;");	
+			} else {
+				$("#totalIcon").html("&#36;");
+			}
+			$("#totalValue").html(TotalValue);	
 			console.log("local storage: " + JSON.stringify(FundName));
 			$("#overall").on('click', function(){
 				console.log('clicked overall')	

@@ -1,5 +1,21 @@
-html {
+html, body {
 	font-family: 'Montserrat', sans-serif;
+}
+
+.main-panel {
+	max-width: 100%;
+	overflow-x: hidden;
+}
+.sidebar .nav > li.active-pro{
+    position: absolute;
+    width: 100%;
+    bottom: 10px;
+}
+
+.sidebar .nav > li.active-pro-tc {
+	position: absolute;
+	width: 100%;
+	bottom: 75px;
 }
 .circle {
 	width: 50px;
@@ -11,6 +27,13 @@ html {
 	text-align: center;
 	background: #2fb56c;
 }
+
+.vcenter {
+	 display: inline-block !important;
+    vertical-align: middle !important;
+    float: none !important;
+}
+
 .fancy {
   line-height: 0.5;
   text-align: center;
@@ -70,7 +93,14 @@ fieldset.title legend {
 	width: 70%;
 	margin: 0 auto;
 }
-
+@media	screen and (max-width: 480px){
+	.main-charts-row {
+		width: 100%;
+	}
+}
+.footer-tc {
+	display: none !important;
+}
 .text-center {
 	text-align: center;
 }
