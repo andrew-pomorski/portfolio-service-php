@@ -28,8 +28,8 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}" style="padding-top: 0 !important;">
-	            	<img src="img/brite-logo-v2.png"/>
+                    <a class="navbar-brand" href="{{ url('/') }}" style="padding: 10px !important;">
+	            	<img style="width: 80px; height: auto;" src="img/brite-logo-v2.png"/>
 		    </a>
                 </div>
 
@@ -44,7 +44,6 @@
                         <!-- Authentication Links -->
                         @if (Auth::guest())
                             <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

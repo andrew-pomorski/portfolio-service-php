@@ -51,7 +51,7 @@
 
     -->
 
-    	<div class="sidebar-wrapper">
+    	<div class="sidebar-wrapper navbar-collapse">
             <div class="logo">
                 <a class="simple-text">
 		 	<img src="img/LogoWhiteTrans.png" alt="Brite" style="height: 30px; width: auto;"/>
@@ -63,34 +63,32 @@
             <ul class="nav">
                 <li>
                     <a href="#!allocation" id="allocation">
-                        <!-- <i class="pe-7s-graph"></i> -->
-			<i class="fa fa-pie-chart" aria-hidden="true"></i>
-                        <p>Portfolio Allocation</p>
+			<i class="fa fa-pie-chart fa-fw" aria-hidden="true"></i>
+                        <span>Portfolio Allocation</span>
                     </a>
                 </li>
                 <li>
                     <a href="#!investments" id="investments">
-			<i class="fa fa-list" aria-hidden="true"></i>
-                        <p>List of Investments</p>
+			<i class="fa fa-list fa-lg" aria-hidden="true"></i>
+                        <span>List of Investments</span>
                     </a>
                 </li>
                 <li>
                     <a href="#!historical" id="historical">
-                        <!-- <i class="pe-7s-note2"></i> -->
-			<i class="fa fa-line-chart" aria-hidden="true"></i>
-                        <p>Historical Performance</p>
+			<i class="fa fa-line-chart fa-lg" aria-hidden="true"></i>
+                        <span>Historical Performance</span>
                     </a>
                 </li>
 		<li class="active-pro">
-			<a href="mailto:support@briteinvest.com?subject=Pension%20">
-				<i class="fa fa-envelope-open-o" aria-hidden="true"></i>
-				<p>Contact Us</p> 
+			<a href="mailto:support@briteinvest.com?subject=Portfolio%20Dashboard%20question...">
+				<i class="fa fa-envelope-open-o fa-fw" aria-hidden="true"></i>
+				<span>Contact Us</span> 
 			</a>
 		</li>
 		<li class="active-pro-tc">
 			<a href="https://briteinvest.com/#/content/legal/disclaimer">
-				<i class="fa fa-info-circle" aria-hidden="true"></i>
-				<p>Terms and Conditions</p> 
+				<i class="fa fa-info-circle fa-lg" aria-hidden="true"></i>
+				<span>Terms and Conditions</span> 
 			</a>
 		</li>
             </ul>
@@ -206,7 +204,9 @@
 	<script src="assets/js/demo.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
-		
+			$('.navbar-collapse>ul>li>a').on('click', function(){
+				$('.navbar-collapse').collapse('hide');
+			});	
 			var FundName = localStorage.getItem('userData');
 			var FundName = JSON.parse(FundName);
 			var TotalValue = Math.round(FundName[0].Value + FundName[1].Value).toFixed(2);
