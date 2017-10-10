@@ -39,6 +39,13 @@ Route::group(['prefix' => 'portfolio_api'], function(){
 });
 **/
 
+// Separate API authentication logic
+/**
+Route::group(['prefix' => 'authenticate_api'], function(){
+	Route::get('/auth_web_user', 'ManuallyAuthorizeLaravelUser@authenticateLocalUSer');
+});
+**/
+
 
 Auth::routes();
 

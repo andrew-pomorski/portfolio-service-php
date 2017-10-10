@@ -16,7 +16,7 @@ class ManuallyAuthorizeLaravelUser extends Controller
     public function authenticateLocalUser(Request $req)
     {
 	$email = $req->username;
-	$password = $req->passwprd;
+	$password = $req->pwd;
         if (Auth::attempt(['email' => $email, 'password' => $password])) {
             // Authentication passed...
             return redirect()->intended('/');
