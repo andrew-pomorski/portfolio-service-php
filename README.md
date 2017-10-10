@@ -9,7 +9,12 @@ The basic auth for this app is the default one, scaffolded by Laravel.
 In routes/web.php there are two route groups: **web** and **portfolio_api**
 
 * Web routes are used for returning views and are protected with basic Laravel Authentication.
+Authorization for these requests need to be validated through Laravel.
+To Authorize Laravel user, username (email) and password needs to be passed in a POST request to
 
+```
+/authorize_api/auth_web_user?username=<< username >>&pwd=<< password >>
+```
 
 * Portfolio routes are used for the JSON API and are protected with Laravel Auth and Middleware.
 Laravel Auth makes sure that the client is  logged in, if it's not it redirects user to /error path and returns view informing about what happened.
@@ -132,6 +137,19 @@ Example response
 ```
 ### Account info
 
+This route returns the current account info (For the authorized user). The call to this route is usually made first (before rendering first view). 
+The data includes the currency, portfolio level and cash.
 
+```
+/portfolio_api/account_info?clientId=<< client id >>
+```
 
+Example response: 
 
+```
+{
+	Cash: 4866.21
+	Currency: USD
+	Portfolio: 5
+}
+```
