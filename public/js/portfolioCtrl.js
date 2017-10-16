@@ -2,7 +2,8 @@ var portfolioApp = angular.module('portfolioService', ['ngRoute']);
 
 
 //var base_api_url = 'http://staging-portfolio.briteinvest.com';
-var base_api_url = 'http://54.169.103.250';
+//var base_api_url = 'http://54.169.103.250';
+var base_api_url = 'https://dashboard.brite-advisors.com'
 // TODO: Fix this.
 var client_id = 'test@briteinvest.com';
 portfolioApp.config(function($routeProvider){

@@ -32,7 +32,7 @@
 
 
     <!--     Fonts and icons     -->
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'> -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700" rel="stylesheet">
     <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
@@ -80,7 +80,7 @@
                     </a>
                 </li>
 		<li class="active-pro">
-			<a href="mailto:support@briteinvest.com?subject=Portfolio%20Dashboard%20question...">
+			<a href="mailto:support@brite-advisors.com?subject=Portfolio%20Dashboard%20question...">
 				<i class="fa fa-envelope-open-o fa-fw" aria-hidden="true"></i>
 				<span>Contact Us</span> 
 			</a>
@@ -226,38 +226,45 @@
 			$('.navbar-collapse>ul>li>a').on('click', function(){
 				$('.navbar-collapse').collapse('hide');
 			});	
-			var FundName = localStorage.getItem('userData');
-			var FundName = JSON.parse(FundName);
-			var TotalValue = Math.round(FundName[0].Value + FundName[1].Value).toFixed(2);
-			var Currency = FundName[0].Currency;
-			var FundName = FundName[0].FundName;
-			console.log("Currency debug: " + Currency);
-			if (Currency == 'GBP') {
-				$("#totalIcon").html("&#163;");	
-			} else {
-				$("#totalIcon").html("&#36;");
-			}
-			$("#totalValue").html(TotalValue);	
-			console.log("local storage: " + JSON.stringify(FundName));
-			$("#overall").on('click', function(){
-				console.log('clicked overall')	
-				$("#currently_viewing").html("");
-			});			
+			//var FundName = localStorage.getItem('userData');
+			//var FundName = JSON.parse(FundName);
+			var accInfoUrl = 'https://dashboard.brite-advisors.com/getaccinfo';
+			$.get(accInfoUrl, function(data){
+				console.log("Inline request: ");
+				var accData = JSON.parse(data);
+				var nonCash = accData[0].Value;
+				var Cash = accData[1].Value;
+				var TotalValue  = Math.round(nonCash + Cash).toFixed(2);
+				var Currency = accData[0].Currency;
+				var FundName = accData[0].FundName;
+				console.log("Currency debug: " + Currency);
+				if (Currency == 'GBP') {
+					$("#totalIcon").html("&#163;");	
+				} else {
+					$("#totalIcon").html("&#36;");
+				}
+				$("#totalValue").html(TotalValue);	
+				console.log("local storage: " + JSON.stringify(FundName));
+				$("#overall").on('click', function(){
+					console.log('clicked overall')	
+					$("#currently_viewing").html("");
+				});			
 
-			$("#allocation").on('click', function(){
-				console.log('clicked allocation')	
-				$("#currently_viewing").html("Portfolio Allocation");
-			});			
-			
-			$("#investments").on('click', function(){
-				console.log('clicked investments');	
-				$("#currently_viewing").html("List of Investments");
-			});
-						
-			$("#historical").on('click', function(){
-				console.log('clicked historical')	
-				$("#currently_viewing").html("Historical Performance");
-			});			
+				$("#allocation").on('click', function(){
+					console.log('clicked allocation')	
+					$("#currently_viewing").html("Portfolio Allocation");
+				});			
+				
+				$("#investments").on('click', function(){
+					console.log('clicked investments');	
+					$("#currently_viewing").html("List of Investments");
+				});
+							
+				$("#historical").on('click', function(){
+					console.log('clicked historical')	
+					$("#currently_viewing").html("Historical Performance");
+				});			
+				});
 		});
 	</script>
 
