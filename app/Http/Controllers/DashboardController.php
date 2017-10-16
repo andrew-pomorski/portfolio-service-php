@@ -11,4 +11,8 @@ class DashboardController extends Controller
 	public function getDashboard(){
 		return View::make('dashboard2/new_dashboard');	
 	}
+
+	public function getLegal(){
+		return View::make('dashboard2/legal');
+	}
 }

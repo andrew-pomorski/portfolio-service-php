@@ -86,7 +86,7 @@
 			</a>
 		</li>
 		<li class="active-pro-tc">
-			<a href="https://briteinvest.com/#/content/legal/disclaimer">
+			<a data-toggle="modal" data-target="#legalModal">
 				<i class="fa fa-info-circle fa-lg" aria-hidden="true"></i>
 				<span>Terms and Conditions</span> 
 			</a>
@@ -180,7 +180,26 @@
     </div>
 </div>
 
-
+<!-- modal -->
+<div class="modal fade" id="legalModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Terms and Conditions</h4>
+        </div>
+        <div class="modal-body">
+		<p>Buzz Advisors Pty Ltd (“Buzz”) ACN 135 024 412 is an Australian Financial Services (“AFS”) License Holder of License No. 337670. All financial and investment advice is coordinated and issued by Buzz.</p>
+		<p>Buzz has taken all reasonable steps and reasonable care in producing the information and statements issued on this website but accept no responsibility or liability for any errors, omissions, or misstatements. Buzz and its representatives have provided opinions, forecasts and recommendations based on information available at the time of issue and hold the right to change their judgement and assumptions at any time and without notice.</p>        
+	</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- // modal -->
 </body>
 
     <!--   Core JS Files   -->

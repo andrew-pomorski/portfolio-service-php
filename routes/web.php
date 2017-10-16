@@ -15,7 +15,7 @@
 Route::group(['middleware' => 'auth'], function(){
 	Route::get('/', 'DashboardController@getDashboard');
 	//Route::get('/webdashboard', 'DashboardController@getDashboard');
-
+	Route::get('/legal', 'DashboardController@getLegal');
 });
 
 //Route::get('/testauth', 'CompareCredentialsController@comparePasswordWithHash');
