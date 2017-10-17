@@ -65,7 +65,7 @@ return [
             'strict' => true,
             'engine' => null,
 	    'options' => array(
-	      		PDO::MYSQL_ATTR_SSL_CA => '/var/www/html/portfolio-service/certs/rds-combined-ca-bundle.pem'
+	      		PDO::MYSQL_ATTR_SSL_CA => '/var/www/html/portfolio_service/certs/rds-combined-ca-bundle.pem'
 	     ),
         ],
 
