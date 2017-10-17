@@ -182,6 +182,7 @@ This route returns breakdown of the market share. It can contain one or all of t
 
 ```
 /api/market_share
+```
 
 Example response: 
 
@@ -191,7 +192,6 @@ Example response:
 	Domestic Markets: 9.646735598581904
 	Fixed Income: 33.88494862099511
 }
-
 ```
 
 
