@@ -46,7 +46,15 @@ If they don't match user is redirected to '/' root path.
 
 ### Auth routes 
 
-To create new account use /register route and then /login to sign in.
+~~To create new account use /register route and then~~ 
+/login to sign in.
+**METHOD: POST**
+```
+{
+	"email":"test-hash1@briteinvest.com",
+	"password":"XCtvPgNdSbqidQ=="
+}
+```
 **/register route will not be used in production - this will be done through onboarding**
 
 
