@@ -72,7 +72,7 @@ This route returns JSON with current portfolio data
 
 #### METHOD: GET 
 ```
-/api/current_data?clientId=<< client id >>
+/api/current_data
 ```
 
 Example response
@@ -109,7 +109,7 @@ This route returns JSON with historic data, and takes optional parameter (days) 
 
 #### METHOD: GET 
 ```
-/api/historic_data?clientId=<< client id >>&days=<< amount of days >>
+/api/historic_data?days=<< amount of days >>
 ```
 
 Example response
@@ -148,7 +148,7 @@ The data includes the currency, portfolio level and cash.
 
 #### METHOD: GET 
 ```
-/api/account_info?clientId=<< client id >>
+/api/account_info
 ```
 
 Example response: 
@@ -173,8 +173,7 @@ This route returns breakdown of the market share. It can contain one or all of t
 #### METHOD: GET 
 
 ```
-/api/market_share?clientId=<< client id >>
-```
+/api/market_share
 
 Example response: 
 
