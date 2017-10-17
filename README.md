@@ -188,9 +188,9 @@ Example response:
 
 ```
 {
-	Developed Markets: 56.46831578042299
-	Domestic Markets: 9.646735598581904
-	Fixed Income: 33.88494862099511
+	Developed_Markets: 56.46831578042299
+	Domestic_Markets: 9.646735598581904
+	Fixed_Income: 33.88494862099511
 }
 ```
 
