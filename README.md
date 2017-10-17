@@ -63,8 +63,8 @@ There are 4 **API routes** and 4 **web routes**.
 ### API routes
 
 **User needs to be authenticated through [security service]() in order to make a request.**
-NOTE : 
-**All API URLs are prefixed by /api/. /portfolio_api/ prefix was used in the previous release**
+
+**NOTE :** All API URLs are prefixed by /api/. /portfolio_api/ prefix was used in the previous release
 
 #### Current Data
 
