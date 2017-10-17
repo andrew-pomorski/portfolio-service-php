@@ -13,7 +13,7 @@ Authorization for these requests need to be validated through Laravel.
 To Authorize Laravel user, username (email) and password needs to be passed in a POST request to
 
 ```
-/authorize_api/auth_web_user?username=<< username >>&pwd=<< password >>
+api/auth_web_user?username=<< username >>&pwd=<< password >>
 ```
 
 * Portfolio routes are used for the JSON API and are protected with Laravel Auth and Middleware.
@@ -63,13 +63,16 @@ There are 4 **API routes** and 4 **web routes**.
 ### API routes
 
 **User needs to be authenticated through [security service]() in order to make a request.**
+NOTE : 
+**All API URLs are prefixed by /api/. /portfolio_api/ prefix was used in the previous release**
 
 #### Current Data
 
 This route returns JSON with current portfolio data 
 
+#### METHOD: GET 
 ```
-/portfolio_api/current_data?clientId=<< client id >>
+/api/current_data?clientId=<< client id >>
 ```
 
 Example response
@@ -103,8 +106,10 @@ Example response
 
 This route returns JSON with historic data, and takes optional parameter (days) - the amount of days to show - this parameter defaults to 180.
 
+
+#### METHOD: GET 
 ```
-/portfolio_api/historic_data?clientId=<< client id >>&days=<< amount of days >>
+/api/historic_data?clientId=<< client id >>&days=<< amount of days >>
 ```
 
 Example response
@@ -137,11 +142,13 @@ Example response
 ```
 ### Account info
 
-This route returns the current account info (For the authorized user). The call to this route is usually made first (before rendering first view). 
+This route returns the current account info (For the currently authorized user). The call to this route is usually made first (before rendering first view). 
 The data includes the currency, portfolio level and cash.
 
+
+#### METHOD: GET 
 ```
-/portfolio_api/account_info?clientId=<< client id >>
+/api/account_info?clientId=<< client id >>
 ```
 
 Example response: 
@@ -153,3 +160,31 @@ Example response:
 	Portfolio: 5
 }
 ```
+
+#### Market share
+
+This route returns breakdown of the market share. It can contain one or all of the following keys: 
+	- Fixed Income
+	- Domestic Markets 
+	- Developed Markets
+	- Commodities 
+	- Other
+
+#### METHOD: GET 
+
+```
+/api/market_share?clientId=<< client id >>
+```
+
+Example response: 
+
+```
+{
+	Developed Markets: 56.46831578042299
+	Domestic Markets: 9.646735598581904
+	Fixed Income: 33.88494862099511
+}
+
+```
+
+
