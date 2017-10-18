@@ -73,6 +73,26 @@ There are 4 **API routes** and 4 **web routes**.
 **User needs to be authenticated through [security service]() in order to make a request.**
 
 **NOTE :** All API URLs are prefixed by /api/. /portfolio_api/ prefix was used in the previous release
+### Account info
+
+This route returns the current account info (For the currently authorized user). The call to this route is usually made first (before rendering first view). 
+The data includes the currency, portfolio level and cash.
+
+
+#### METHOD: GET 
+```
+/api/account_info
+```
+
+Example response: 
+
+```
+{
+	Cash: 4866.21
+	Currency: USD
+	Portfolio: 5
+}
+```
 
 #### Current Data
 
@@ -112,8 +132,8 @@ Example response
 ``` 
 #### Historic Data
 
-This route returns JSON with historic data, and takes optional parameter (days) - the amount of days to show - this parameter defaults to 180.
-
+This route returns historic data, and takes optional parameter (days) - the amount of days to show - this parameter defaults to 180.
+The returned object is a map with the key of the currency used in an account.
 
 #### METHOD: GET 
 ```
@@ -123,7 +143,8 @@ This route returns JSON with historic data, and takes optional parameter (days) 
 Example response
 
 ```
-[  
+{  
+   "GBP":[
    {  
       "Country":"UK",
       "Date":"2017-02-20T00:00:00Z",
@@ -144,28 +165,7 @@ Example response
       "Value":4864.555,
       "Cash":0,
       "Total":4864.555
-   },
-	...
-]
-```
-### Account info
-
-This route returns the current account info (For the currently authorized user). The call to this route is usually made first (before rendering first view). 
-The data includes the currency, portfolio level and cash.
-
-
-#### METHOD: GET 
-```
-/api/account_info
-```
-
-Example response: 
-
-```
-{
-	Cash: 4866.21
-	Currency: USD
-	Portfolio: 5
+   }]
 }
 ```
 
